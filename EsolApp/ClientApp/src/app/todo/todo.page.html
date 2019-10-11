@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title style="text-align: center;">Todo App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="showDialogAdd()" color="primary">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Add Todo
+  </ion-button>
+  <ion-list>
+    <h2 *ngIf="CheckTodo()">You have not Todo, please Add Todo</h2>
+    <ion-item-sliding *ngFor="let todo of service.todos">
+      <input type="hidden" value="todo.id">
+      <ion-item *ngIf="!todo.status">
+        <ion-label>
+          <strong>
+            <h1>{{todo.name}}</h1>
+          </strong>
+          <h2>{{todo.description}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option (click)="DoneTodo()" color="success">Done</ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option (click)="DeleteTod()" color="danger">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
