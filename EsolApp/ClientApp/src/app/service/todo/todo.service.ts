@@ -8,12 +8,20 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 export class TodoService {
   public todos: Array<TodoModel> = [];
   constructor(private http: HttpClient) { }
-  readonly rootUrl = 'https://localhost:44346/api';
+  readonly rootUrl = 'https://localhost:44346/api/Todo';
 
-  getTodoList() {
-    this.http.get(this.rootUrl + `/Todo`).toPromise().then(res => this.todos = res as TodoModel[]);
+  getTodoList(checker: boolean) {
+    this.http.get(this.rootUrl).toPromise().then(res => this.todos = res as TodoModel[]);
+    return this.todos.filter(x => x.status === checker);
   }
-  postTodoList(todo: TodoViewModel) {
-    this.http.post<TodoViewModel>(this.rootUrl + `/Todo`, todo);
+  postTodoList(todo) {
+    return this.http.post(this.rootUrl + `/create`, todo);
+  }
+  deleteTodoItem(id) {
+    return this.http.delete(this.rootUrl + '/delete/' + id);
+  }
+  updateStatusTodo(data) {
+    const httpRequest = new HttpRequest('POST', this.rootUrl + `/update`, data);
+    return httpRequest;
   }
 }

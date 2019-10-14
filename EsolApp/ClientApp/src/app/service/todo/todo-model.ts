@@ -1,12 +1,12 @@
 export class TodoModel {
     id?: number;
-    name: string;
+    todoName: string;
     status: boolean;
     description: string;
+    modifyDate: Date;
 }
 
 export class TodoViewModel {
-    name: string;
-    description: string;
-    status: boolean;
+    TodoName: string;
+    Description: string;
 }

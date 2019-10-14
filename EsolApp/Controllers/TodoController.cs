@@ -29,25 +29,34 @@ namespace EsolApp.Controllers
         {
             return  Ok(_todoService.GetAllTodos());
         }
-    
+        [HttpPost]
+        [Route("update")]
+        public void UpdateStatus()
+        {
+            int Id = Convert.ToInt32(Request.Form["Id"]);
+            _todoService.UpdateStatus(Id);
+        }
         // POST: api/Todo
         [HttpPost]
+        [Route("create")]
         public ActionResult<Todos> PostTodos([FromBody]TodoViewModel todo)
         {
             Todos todos = new Todos()
             {
                 TodoName = todo.TodoName,
                 Description = todo.Description,
-                Status = todo.Status,
+                Status = false,
                 CreateDate = DateTime.Now,
                 ModifyDate = DateTime.Now
             };
-            _todoService.AddTodo(todos);
+            //var result = _todoService.AddTodo(todos);
+            //return HttpResponse();
             return CreatedAtAction("GetTodos", new { id = todos.Id }, todo);
         }
 
         // DELETE: api/Todo/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("delete/{id}")]
         public void DeleteTodos(int id)
         {
             _todoService.DeleteTodo(id);

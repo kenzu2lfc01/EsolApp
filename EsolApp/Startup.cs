@@ -44,7 +44,7 @@ namespace EsolApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors(builder => builder.WithOrigins("http://localhost:8100").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8100").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             if (env.IsDevelopment())
             {
