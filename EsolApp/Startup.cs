@@ -3,6 +3,7 @@ using EsolApp.Data.Model;
 using EsolApp.Data.Repositories.Todo;
 using EsolApp.Data.Repository;
 using EsolApp.Services;
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EsolApp
 {
@@ -28,7 +31,6 @@ namespace EsolApp
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -38,14 +40,13 @@ namespace EsolApp
             services.AddDbContext<EsolAppDbContext>(opt=> opt.UseSqlServer(conectionString));
             services.AddScoped<ITodoService, TodoService>();
             services.AddScoped<ITodoRepository, TodoRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseCors(builder => builder.WithOrigins("http://localhost:8100").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

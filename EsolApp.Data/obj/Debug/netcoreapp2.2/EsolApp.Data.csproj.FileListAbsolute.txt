@@ -1,11 +1,11 @@
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.deps.json
+C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.json
+C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.dev.json
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.dll
+C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.pdb
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.csprojAssemblyReference.cache
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.csproj.CoreCompileInputs.cache
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.AssemblyInfoInputs.cache
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.AssemblyInfo.cs
-C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.pdb
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.dll
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.pdb
-C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.json
-C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.dev.json

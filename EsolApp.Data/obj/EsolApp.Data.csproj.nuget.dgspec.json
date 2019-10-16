@@ -44,6 +44,14 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "IdentityModel": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[2.2.0, )"
