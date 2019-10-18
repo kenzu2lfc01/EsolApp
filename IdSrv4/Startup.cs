@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using IdSrv4.Data;
 using IdSrv4.Models;
+using IdSrv4.Services;
+using IdSrv4.Services.PasswordHash;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdSrv4
 {
@@ -30,12 +35,28 @@ namespace IdSrv4
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IHashByMD5, HashByMD5>();
             services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultIdSrv4")));
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddCors();
+            var key = Encoding.UTF8.GetBytes(Configuration["AppSettings:JWT_Secret"].ToString());
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddIdentityServer().AddDeveloperSigningCredential()
+                  .AddOperationalStore(options =>
+                  {
+                      options.ConfigureDbContext = builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultIdSrv4"));
+                      options.EnableTokenCleanup = true;
+                  })
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryClients(Config.GetClients())
+                .AddAspNetIdentity<AppUser>();
             services.Configure<IdentityOptions>(options =>
             {
                 //password setting
@@ -52,14 +73,23 @@ namespace IdSrv4
 
                 options.User.RequireUniqueEmail = true;
             });
-            services.ConfigureApplicationCookie(options =>
+
+            services.AddAuthentication(x =>
             {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = "/Account/Login";
-                options.AccessDeniedPath = "/Account/AccessDenied";
-                options.SlidingExpiration = true;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
             });
 
         }
@@ -75,12 +105,13 @@ namespace IdSrv4
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+            var URL = Configuration["AppSettings:Client_URL"].ToString();
+            app.UseCors(builder => builder.WithOrigins(URL).AllowAnyHeader().AllowAnyMethod());
 
             using (var scope = app.ApplicationServices.CreateScope())
             {

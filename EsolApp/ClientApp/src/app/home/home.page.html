@@ -1,22 +1,14 @@
 <ion-header>
   <ion-toolbar color="success">
-    <ion-title>
-      Home
-    </ion-title>
-    <ion-buttons slot="success">
-      <ion-button>Log Out</ion-button>
-    </ion-buttons>
+    <ion-row>
+      <ion-title>
+        Home
+      </ion-title>
+      <button class="custom-style-button" ion-button *ngIf="!isCurrentUser()" routerLink="/login">Login</button>
+      <button class="custom-style-button" ion-button *ngIf="isCurrentUser()" routerLink="#">Logout</button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <h3 style="margin-left:10px">Login</h3>
-  <ion-item>
-    <ion-label>Username</ion-label>
-    <ion-input placeholder="Enter Username"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Password</ion-label>
-    <ion-input type="password" placeholder="Enter Password"></ion-input>
-  </ion-item>
+  <ion-label *ngIf="isCurrentUser()">Welcome to {{this.loginService.User.Name}}</ion-label>
 </ion-content>

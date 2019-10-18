@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../service/auth/login.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private loginService: LoginService) { }
+  isCurrentUser() {
+    if (this.loginService.User == null) { return false; }
+    return true;
+  }
 }

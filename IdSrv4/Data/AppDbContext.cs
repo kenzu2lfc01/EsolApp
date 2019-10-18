@@ -1,8 +1,12 @@
-﻿using IdSrv4.Models;
+﻿using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Options;
+using IdSrv4.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
+using System.Reflection;
 
 namespace IdSrv4.Data
 {

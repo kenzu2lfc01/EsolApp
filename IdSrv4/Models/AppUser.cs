@@ -9,5 +9,6 @@ namespace IdSrv4.Models
 {
     public class AppUser : IdentityUser<Guid>
     {
+        public string Name { get; set; }
     }
 }

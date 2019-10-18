@@ -8,10 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { TodoService } from './service/todo/todo.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent , LoginComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

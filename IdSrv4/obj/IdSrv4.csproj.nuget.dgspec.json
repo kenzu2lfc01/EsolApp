@@ -44,7 +44,23 @@
       "frameworks": {
         "net461": {
           "dependencies": {
+            "IdentityServer4.AspNetIdentity": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "IdentityServer4.EntityFramework": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.3.2, )"
+            },
             "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
