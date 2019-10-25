@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace EsolApp.Data.Model
@@ -12,5 +13,6 @@ namespace EsolApp.Data.Model
         public string TodoName { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
+        public virtual IEnumerable<Images> Images { get; set; } 
     }
 }

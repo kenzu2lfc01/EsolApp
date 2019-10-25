@@ -20,4 +20,4 @@ const routes: Routes = [
   ],
   declarations: [TodoPage]
 })
-export class TodoPageModule {}
+export class TodoPageModule { }

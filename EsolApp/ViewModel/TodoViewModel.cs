@@ -7,8 +7,10 @@ namespace EsolApp.ViewModel
 {
     public class TodoViewModel
     {
+        public int Id { get; set; }
         public string TodoName { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
+        public List<ImageViewModel> ImageViewModels { get; set; }
     }
 }

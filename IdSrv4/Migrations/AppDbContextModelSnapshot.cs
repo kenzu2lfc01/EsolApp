@@ -78,6 +78,8 @@ namespace IdSrv4.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<bool>("Status");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")

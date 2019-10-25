@@ -17,17 +17,32 @@ namespace EsolApp.Controllers
     public class TodoController : ControllerBase
     {
         private readonly ITodoService _todoService;
-
-        public TodoController(ITodoService todoService)
+        private readonly IImageService _imageService;
+        public TodoController(ITodoService todoService, IImageService imageService)
         {
             _todoService = todoService;
+            _imageService = imageService;
         }
 
         // GET: api/Todo
         [HttpGet]
-        public ActionResult<IEnumerable<Todos>> GetTodos()
+        public ActionResult<IEnumerable<TodoViewModel>> GetTodos()
         {
-            return  Ok(_todoService.GetAllTodos());
+            List<TodoViewModel> lstTodoOutput = new List<TodoViewModel>();
+            var todos = _todoService.GetAllTodos();
+            foreach (var item in todos)
+            {
+                TodoViewModel todoOutput = new TodoViewModel()
+                {
+                    Id = item.Id,
+                    TodoName = item.TodoName,
+                    Description = item.Description,
+                    Status = item.Status,
+                    ImageViewModels = _imageService.GetImageByTodoId(item.Id)
+                };
+                lstTodoOutput.Add(todoOutput);
+            }
+            return Ok(lstTodoOutput);
         }
         [HttpPost]
         [Route("update")]
@@ -49,7 +64,7 @@ namespace EsolApp.Controllers
                 CreateDate = DateTime.Now,
                 ModifyDate = DateTime.Now
             };
-            //var result = _todoService.AddTodo(todos);
+            _todoService.AddTodo(todos);
             //return HttpResponse();
             return CreatedAtAction("GetTodos", new { id = todos.Id }, todo);
         }

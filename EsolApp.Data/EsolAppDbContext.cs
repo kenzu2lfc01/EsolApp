@@ -13,5 +13,6 @@ namespace EsolApp.Data
 
         }
         public virtual DbSet<Todos> Todos { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
     }
 }

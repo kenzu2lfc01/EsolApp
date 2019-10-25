@@ -1,14 +1,13 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-row>
-      <ion-title>
-        Home
-      </ion-title>
-      <button class="custom-style-button" ion-button *ngIf="!isCurrentUser()" routerLink="/login">Login</button>
-      <button class="custom-style-button" ion-button *ngIf="isCurrentUser()" routerLink="#">Logout</button>
-    </ion-row>
+  <ion-toolbar>
+    <ion-title>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-label *ngIf="isCurrentUser()">Welcome to {{this.loginService.User.Name}}</ion-label>
+  <div style="margin-top: 10px; margin-left: 10px;">
+    <ion-label *ngIf="loginService.isCurrentUser()">Welcome</ion-label>
+    <ion-label *ngIf="!loginService.isCurrentUser()">If you want use us service, please <a href="/login">Login</a>
+    </ion-label>
+  </div>
 </ion-content>

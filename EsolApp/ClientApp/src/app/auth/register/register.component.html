@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row style="height: 10%;">
+  </ion-row>
+  <form style="text-align: center;">
+    <ion-label style="font-size: 30px;" color="primary">-Register-</ion-label>
+    <br>
+    <ion-label color="danger">{{message}}</ion-label>
+    <br>
+    <ion-item>
+      <ion-label color="primary">Fullname</ion-label>
+      <ion-input required name="name" [(ngModel)]="RegisterData.Name" placeholder="Enter Fullname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Username</ion-label>
+      <ion-input required name="username"
+                 [(ngModel)]="RegisterData.UserName" placeholder="Enter Username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Email</ion-label>
+      <ion-input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="email" [(ngModel)]="RegisterData.Email"
+                 type="email" placeholder="Enter Email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Password</ion-label>
+      <ion-input required name="password"
+                 [(ngModel)]="RegisterData.Password" type="password" placeholder="Enter Password">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Retype Password</ion-label>
+      <ion-input required name="retypepassword"
+                 [(ngModel)]="retyePassword" type="password" placeholder="Enter Retype Password">
+      </ion-input>
+    </ion-item>
+    <br>
+    <ion-button (click)="register()" color="primary" expand="block">Register</ion-button>
+  </form>
+</ion-content>

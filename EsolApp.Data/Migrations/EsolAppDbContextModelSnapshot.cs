@@ -19,6 +19,31 @@ namespace EsolApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EsolApp.Data.Model.Images", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Base64Image");
+
+                    b.Property<string>("CreateBy");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<string>("ModifyBy");
+
+                    b.Property<DateTime?>("ModifyDate");
+
+                    b.Property<int?>("TodoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TodoId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("EsolApp.Data.Model.Todos", b =>
                 {
                     b.Property<int>("Id")
@@ -42,6 +67,13 @@ namespace EsolApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Todos");
+                });
+
+            modelBuilder.Entity("EsolApp.Data.Model.Images", b =>
+                {
+                    b.HasOne("EsolApp.Data.Model.Todos", "Todo")
+                        .WithMany("Images")
+                        .HasForeignKey("TodoId");
                 });
 #pragma warning restore 612, 618
         }

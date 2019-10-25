@@ -1,5 +1,4 @@
-export class LoginModel {
-    Name: string;
+export class LoginViewModel {
     UserName: string;
-    Email: string;
+    Password: string;
 }

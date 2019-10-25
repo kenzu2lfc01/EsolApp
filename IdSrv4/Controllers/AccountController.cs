@@ -12,6 +12,7 @@ using IdSrv4.Models;
 using IdSrv4.Models.AccountViewModels;
 using IdSrv4.Services;
 using IdSrv4.Services.PasswordHash;
+using IdSrv4.Services.ViewRender;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,7 @@ namespace IdSrv4.Controllers
         private readonly AppDbContext _appContext;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IViewRenderService _viewRender;
         private readonly AppSettings _appSettings;
         private readonly IHashByMD5 _hashByMD5;
 
@@ -35,6 +37,7 @@ namespace IdSrv4.Controllers
             AppDbContext appContext,
             IEmailSender emailSender,
             IOptions<AppSettings> appSettings,
+            IViewRenderService viewRender,
             IHashByMD5 hashByMD5,
             ILogger<AccountController> logger)
         {
@@ -42,6 +45,7 @@ namespace IdSrv4.Controllers
             _emailSender = emailSender;
             _hashByMD5 = hashByMD5;
             _logger = logger;
+            _viewRender = viewRender;
             _appSettings = appSettings.Value;
         }
         
@@ -51,7 +55,7 @@ namespace IdSrv4.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             var user =  _appContext.Users.FirstOrDefault(x=> x.UserName == model.UserName);
-            if (user != null &&  _hashByMD5.VerifyMd5Hash(model.Password, user.PasswordHash))
+            if (user != null &&  _hashByMD5.VerifyMd5Hash(model.Password, user.PasswordHash) && user.Status == true)
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -78,7 +82,7 @@ namespace IdSrv4.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = _appContext.Users.FirstOrDefault(x => x.UserName == model.UserName);
+            var user = _appContext.Users.FirstOrDefault(x => x.UserName == model.UserName || x.Email == model.Email);
             if(user != null)
             {
                 return BadRequest(new { message = "User name is already" });
@@ -87,10 +91,25 @@ namespace IdSrv4.Controllers
             {
                 UserName = model.UserName,
                 PasswordHash = _hashByMD5.GetMd5Hash(model.Password),
-                Email = model.Email
+                Email = model.Email,
+                Name = model.Name,
+                Status = false
             };
-            var result =  _appContext.Users.Add(appUser);
-            return Ok(new RegisterResponseViewModel(appUser));
+            var result = _appContext.Users.Add(appUser);
+            _appContext.SaveChanges();
+            //string Mess = await _viewRender.RenderToStringAsync(@"C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\IdSrv4\MailBody.cshtml", appUser);
+            string Mess = "<a href='https://localhost:44398/api/Account/comfirm/" + appUser.UserName + "'> Comfirm Email Address</a>";
+            return Ok(await _emailSender.SendEmailAsync(appUser.Email, "Comfirm your Account", Mess, appUser.Name));
+        }
+        [HttpGet]
+        [Route("comfirm/{username}")]
+        public async Task<IActionResult> Comfirm(string username)
+        {
+            var user = _appContext.Users.FirstOrDefault(x => x.UserName == username);
+            user.Status = true;
+            _appContext.SaveChanges();
+            Response.Redirect("http://localhost:8100/home");
+            return Ok();
         }
     }
 }

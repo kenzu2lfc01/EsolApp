@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EsolApp.Data.Migrations
 {
     [DbContext(typeof(EsolAppDbContext))]
-    [Migration("20191011064830_update-1348-11102019")]
-    partial class update134811102019
+    [Migration("20191025065507_update-1354-25102019")]
+    partial class update135425102019
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace EsolApp.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EsolApp.Data.Model.Images", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Base64Image");
+
+                    b.Property<string>("CreateBy");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<string>("ModifyBy");
+
+                    b.Property<DateTime?>("ModifyDate");
+
+                    b.Property<int?>("TodoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TodoId");
+
+                    b.ToTable("Images");
+                });
 
             modelBuilder.Entity("EsolApp.Data.Model.Todos", b =>
                 {
@@ -44,6 +69,13 @@ namespace EsolApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Todos");
+                });
+
+            modelBuilder.Entity("EsolApp.Data.Model.Images", b =>
+                {
+                    b.HasOne("EsolApp.Data.Model.Todos", "Todo")
+                        .WithMany("Images")
+                        .HasForeignKey("TodoId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,19 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-row>
+        <ion-title>
+          {{routerName}}
+        </ion-title>
+        <button class="custom-style-button" ion-button *ngIf="!service.isCurrentUser()"
+                routerLink="/login">Login</button>
+        <button class="custom-style-button" ion-button *ngIf="service.isCurrentUser()"
+                (click)="logout()">Logout</button>
+      </ion-row>
+    </ion-toolbar>
+    <div></div>
+  </ion-header>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="home">

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { TodoModel, TodoViewModel } from './todo-model';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   public todos: Array<TodoModel> = [];
+  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', }), responseType: 'text' as 'json' };
   constructor(private http: HttpClient) { }
-  readonly rootUrl = 'https://localhost:44346/api/Todo';
-
-  getTodoList(checker: boolean) {
-    this.http.get(this.rootUrl).toPromise().then(res => this.todos = res as TodoModel[]);
-    return this.todos.filter(x => x.status === checker);
+  rootUrl = 'https://localhost:44346/api/Todo';
+  async getTodoList() {
+    await this.http.get(this.rootUrl, this.httpOptions).toPromise().then((res: string) => this.todos = JSON.parse(res));
+    return await this.todos;
   }
   postTodoList(todo) {
     return this.http.post(this.rootUrl + `/create`, todo);

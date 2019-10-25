@@ -1,0 +1,8 @@
+<form style="text-align: center;">
+  <h2>Upload Image</h2>
+  <ion-col>
+    <ion-label id="profile_image" color="primary" stacked></ion-label>
+    <ion-input #file (change)="loadFile($event)" (change)="upload($event)" type="file" accept="image/*" id="upload">
+    </ion-input>
+  </ion-col>
+</form>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../service/auth/login.service';
+import { RouterNamesService } from '../service/router-names.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,12 @@ import { LoginService } from '../service/auth/login.service';
 })
 export class HomePage {
 
-  constructor(private loginService: LoginService) { }
-  isCurrentUser() {
-    if (this.loginService.User == null) { return false; }
-    return true;
+  constructor(private loginService: LoginService, private routerNameService: RouterNamesService) {
+  }
+  logout() {
+    this.loginService.logout();
+  }
+  ionViewWillEnter() {
+    this.routerNameService.name.next('Home');
   }
 }

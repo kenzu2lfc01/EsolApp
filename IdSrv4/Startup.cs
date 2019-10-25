@@ -7,6 +7,7 @@ using IdSrv4.Data;
 using IdSrv4.Models;
 using IdSrv4.Services;
 using IdSrv4.Services.PasswordHash;
+using IdSrv4.Services.ViewRender;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,13 +35,14 @@ namespace IdSrv4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IHashByMD5, HashByMD5>();
             services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultIdSrv4")));
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddSingleton<IEmailSender, EmailSender>();
-            services.AddCors();
+            services.AddSingleton<IViewRenderService, ViewRenderService>();
             var key = Encoding.UTF8.GetBytes(Configuration["AppSettings:JWT_Secret"].ToString());
 
             services.AddIdentity<AppUser, AppRole>()
@@ -97,6 +99,11 @@ namespace IdSrv4
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var URL = Configuration["AppSettings:Client_URL"].ToString();
+            var cordSendGird = "https://api.sendgrid.com/v3/mail/send";
+            app.UseCors(builder => builder.WithOrigins(URL).AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(builder => builder.WithOrigins(cordSendGird).AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -110,8 +117,7 @@ namespace IdSrv4
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
-            var URL = Configuration["AppSettings:Client_URL"].ToString();
-            app.UseCors(builder => builder.WithOrigins(URL).AllowAnyHeader().AllowAnyMethod());
+ 
 
             using (var scope = app.ApplicationServices.CreateScope())
             {

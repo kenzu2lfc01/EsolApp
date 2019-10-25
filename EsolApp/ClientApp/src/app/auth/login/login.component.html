@@ -1,7 +1,6 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title>
-      Login
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,18 +8,21 @@
   <ion-row style="height: 10%;">
   </ion-row>
   <form style="text-align: center;">
-    <ion-label style="font-size: 30px;" color="primary">|----Login----|</ion-label>
+    <ion-label style="font-size: 30px;" color="success">-Login-</ion-label>
+    <br>
+    <ion-label color="danger">{{error}}</ion-label>
     <br>
     <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-input placeholder="Enter Username"></ion-input>
+      <ion-label color="success">Username</ion-label>
+      <ion-input name="username" [(ngModel)]="userLogin.UserName" placeholder="Enter Username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input type="password" placeholder="Enter Password"></ion-input>
+      <ion-label color="success">Password</ion-label>
+      <ion-input name="password" [(ngModel)]="userLogin.Password" type="password" placeholder="Enter Password">
+      </ion-input>
     </ion-item>
     <br>
-    <ion-button color="primary" expand="block">Login</ion-button>
+    <ion-button (click)="login()" color="success" expand="block">Login</ion-button>
     <br>
     <button ion-button class="custom-style-button-login">Forgot Password</button>
     <br>
@@ -28,6 +30,6 @@
     <button ion-button class="custom-style-button-login">Login With Outlook Mail</button>
     <br>
     <br>
-    <button ion-button class="custom-style-button-login">Register</button>
+    <button routerLink="/register" ion-button class="custom-style-button-login">Register</button>
   </form>
 </ion-content>

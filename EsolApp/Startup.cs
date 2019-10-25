@@ -1,5 +1,8 @@
+using AutoMapper;
+using EsolApp.AutoMapper;
 using EsolApp.Data;
 using EsolApp.Data.Model;
+using EsolApp.Data.Repositories.Images;
 using EsolApp.Data.Repositories.Todo;
 using EsolApp.Data.Repository;
 using EsolApp.Services;
@@ -36,11 +39,21 @@ namespace EsolApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            var conectionString = Configuration.GetConnectionString("Default");
+            string conectionString = "Data Source=HCM-THANGNQ;Initial Catalog=EsolApp;Integrated Security=True;Persist Security Info=True";
             services.AddDbContext<EsolAppDbContext>(opt=> opt.UseSqlServer(conectionString));
             services.AddScoped<ITodoService, TodoService>();
             services.AddScoped<ITodoRepository, TodoRepository>();
-            
+            services.AddScoped<IEnglishBookService, EnglishBookService>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IImageRepository, ImageRepository>();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

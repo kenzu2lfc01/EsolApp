@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EsolApp", "EsolApp\EsolApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EsolApp.Data", "EsolApp.Data\EsolApp.Data.csproj", "{87DC25FF-C1C6-4C32-AAB4-35665313A4BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdSrv4", "IdSrv4\IdSrv4.csproj", "{5D09C6D6-806F-4EF5-BC1C-E8A5F9DD5D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdSrv4", "IdSrv4\IdSrv4.csproj", "{5D09C6D6-806F-4EF5-BC1C-E8A5F9DD5D89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
