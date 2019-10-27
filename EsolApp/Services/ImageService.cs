@@ -62,7 +62,7 @@ namespace EsolApp.Services
         }
 
         public List<ImageViewModel> GetImageByTodoId(int todoId)
-        {
+        {   
             List<Images> images = _imageRepository.FindAll().Where(x => x.Todo.Id == todoId).ToList();
             List<ImageViewModel> imageViewModels = new List<ImageViewModel>();
             foreach(var item in images)
@@ -97,6 +97,11 @@ namespace EsolApp.Services
             byte[] pdfBytes = File.ReadAllBytes(FilePath);
             string pdfBase64 = Convert.ToBase64String(pdfBytes);
             return pdfBase64;
+        }
+        public void DeleteImageTodo(int todoId)
+        {
+            var imgae = _imageRepository.FindAll().Where(x => x.Todo.Id == todoId).FirstOrDefault();
+            _imageRepository.Remove(imgae);
         }
     }
 }

@@ -33,10 +33,11 @@ export class DialogComponent implements OnInit {
     }, err => {
       this.message = err;
     });
-    this.sinper.hide();
-    this.dialogRef.close();
-    this.todoService.getTodoList();
-    alert(this.message);
+    setTimeout(() => {
+      this.dialogRef.close();
+      this.todoService.getTodoList();
+      alert(this.message)
+    }, 3000);
   }
   loadFile(event) {
     this.currentFile = event.target.files;

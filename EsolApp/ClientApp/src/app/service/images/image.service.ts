@@ -14,6 +14,6 @@ export class ImageService {
     return uploadReq;
   }
   deleteImage(imageId) {
-    this.http.delete(this.rootUrl + '/' + imageId);
+    return this.http.delete(this.rootUrl + '/delete/' + imageId);
   }
 }

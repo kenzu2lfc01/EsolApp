@@ -56,9 +56,9 @@
                 </ion-label>
               </ion-row>
               <ion-row>
-                <img *ngFor="let image of todo.imageViewModels" (click)='openNewTab("/assets/icon/favicon.png")'
+                <img *ngFor="let image of todo.imageViewModels" (click)='deleteImage(image.id)'
                      style="width: 30px; height: 30px;"
-                     [src]="'data:image/jpg;base64,' + image.Base64Image">
+                     [src]="'data:image/jpg;base64,' + image.base64Image">
                 <ion-button (click)="openMenuUpload(todo.id)" shape="round">
                   <ion-icon name="add" slot="icon-only"></ion-icon>
                 </ion-button>

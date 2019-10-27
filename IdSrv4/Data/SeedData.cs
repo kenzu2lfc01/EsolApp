@@ -23,12 +23,12 @@ namespace IdSrv4.Data
             //    PasswordHash = "62c8ad0a15d9d1ca38d5dee762a16e01",
             //    PhoneNumber = "0339445627"
             //});
-            //context.Roles.Add(new AppRole() 
+            //context.Roles.Add(new AppRole()
             //{
             //    Id = Guid.Parse("a142092d-0d75-4636-bac8-57897db3c6e1"),
             //    Name = "administrator",
             //    NormalizedName = "ADMIN"
-                
+
             //});
             //context.UserRoles.Add(new AppUserRole()
             //{

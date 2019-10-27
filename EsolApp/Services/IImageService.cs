@@ -16,6 +16,7 @@ namespace EsolApp.Services
         void MoveFile(IFormFile file, string webRoot);
         string ConvertPdfToBase64(string FilePath);
         List<ImageViewModel> GetImageByTodoId(int todoId);
+        void DeleteImageTodo(int todoId);
 
     }
 }

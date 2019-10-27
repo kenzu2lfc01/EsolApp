@@ -75,6 +75,7 @@ namespace EsolApp.Controllers
         public void DeleteTodos(int id)
         {
             _todoService.DeleteTodo(id);
+            _imageService.DeleteImageTodo(id);
         }
     }
 }

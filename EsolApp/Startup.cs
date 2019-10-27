@@ -39,7 +39,7 @@ namespace EsolApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            string conectionString = "Data Source=HCM-THANGNQ;Initial Catalog=EsolApp;Integrated Security=True;Persist Security Info=True";
+            string conectionString = "Data Source=DESKTOP-0SKJ0NC\\THANG98;Initial Catalog=EsolApp;Integrated Security=True;Persist Security Info=True";
             services.AddDbContext<EsolAppDbContext>(opt=> opt.UseSqlServer(conectionString));
             services.AddScoped<ITodoService, TodoService>();
             services.AddScoped<ITodoRepository, TodoRepository>();

@@ -104,10 +104,9 @@ export class TodoPage implements OnInit {
     });
   }
   loadDataOfPage() {
-    this.service.getTodoList().then((res) => {
+    setTimeout(() => this.service.getTodoList().then((res) => {
       this.todoList = res.filter(x => x.status === this.checker);
-      console.log(this.todoList);
-    });
+    }), 5000);
   }
   public CheckTodo() {
     if (this.service.todos.length === 0) { return true; }
@@ -115,8 +114,25 @@ export class TodoPage implements OnInit {
   }
   ngOnInit() {
   }
-  openNewTab(temp: string) {
-    window.open('http://localhost:8100' + temp, '_blank');
+  async deleteImage(id) {
+    const alert = await this.alertController.create({
+      header: 'Do you want delete image?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => { }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            this.imageService.deleteImage(id).subscribe(() => {
+              this.loadDataOfPage();
+            });
+          }
+        }]
+    });
+    await alert.present();
   }
   openMenuUpload(id) {
     this.dialog.open(DialogComponent, { data: { todoId: id, checker: this.checker } });

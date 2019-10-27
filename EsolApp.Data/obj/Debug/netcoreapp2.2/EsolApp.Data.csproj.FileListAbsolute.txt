@@ -9,3 +9,12 @@ C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcorea
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.AssemblyInfo.cs
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.dll
 C:\Users\thang.nguyen\Desktop\IonicStudy\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.pdb
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.deps.json
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.json
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.runtimeconfig.dev.json
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.dll
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\bin\Debug\netcoreapp2.2\EsolApp.Data.pdb
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.AssemblyInfoInputs.cache
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.AssemblyInfo.cs
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.dll
+D:\Homework\LT-ASP\Ionic_ASPNet\EsolApp\EsolApp.Data\obj\Debug\netcoreapp2.2\EsolApp.Data.pdb
