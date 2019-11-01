@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EsolApp
@@ -39,13 +40,14 @@ namespace EsolApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            string conectionString = "Data Source=DESKTOP-0SKJ0NC\\THANG98;Initial Catalog=EsolApp;Integrated Security=True;Persist Security Info=True";
+            string conectionString = "Data Source=HCM-THANGNQ;Initial Catalog=EsolApp;Integrated Security=True;Persist Security Info=True";
             services.AddDbContext<EsolAppDbContext>(opt=> opt.UseSqlServer(conectionString));
             services.AddScoped<ITodoService, TodoService>();
             services.AddScoped<ITodoRepository, TodoRepository>();
             services.AddScoped<IEnglishBookService, EnglishBookService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IJwtService, JwtService>();
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
@@ -64,6 +66,7 @@ namespace EsolApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
             }
             else
             {

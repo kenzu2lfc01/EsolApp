@@ -44,6 +44,31 @@ namespace EsolApp.Data.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("EsolApp.Data.Model.TodoShare", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreateBy");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<string>("ModifyBy");
+
+                    b.Property<DateTime?>("ModifyDate");
+
+                    b.Property<int?>("TodosId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TodosId");
+
+                    b.ToTable("TodoShare");
+                });
+
             modelBuilder.Entity("EsolApp.Data.Model.Todos", b =>
                 {
                     b.Property<int>("Id")
@@ -64,6 +89,8 @@ namespace EsolApp.Data.Migrations
 
                     b.Property<string>("TodoName");
 
+                    b.Property<Guid>("UserId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Todos");
@@ -74,6 +101,13 @@ namespace EsolApp.Data.Migrations
                     b.HasOne("EsolApp.Data.Model.Todos", "Todo")
                         .WithMany("Images")
                         .HasForeignKey("TodoId");
+                });
+
+            modelBuilder.Entity("EsolApp.Data.Model.TodoShare", b =>
+                {
+                    b.HasOne("EsolApp.Data.Model.Todos", "Todos")
+                        .WithMany("TodoShares")
+                        .HasForeignKey("TodosId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,7 @@
 ﻿using EsolApp.Data.Model;
 using EsolApp.Data.Repositories.Todo;
 using EsolApp.Data.Repository;
+using EsolApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,24 @@ namespace EsolApp.Services
             var todo = _todoRepository.FindById(Id);
             todo.Status = true;
             _todoRepository.Commit();
+        }
+        public bool UpdateTodo(TodoPatchViewModel todoPatchViewModel)
+        {
+            var todo = _todoRepository.FindById(todoPatchViewModel.Id);
+            if (!String.IsNullOrEmpty(todoPatchViewModel.TodoName))
+            {
+                todo.TodoName = todoPatchViewModel.TodoName;
+            }
+            if (!String.IsNullOrEmpty(todoPatchViewModel.Description))
+            {
+                todo.Description = todoPatchViewModel.Description;
+            }
+            else
+            {
+                return false ;
+            }
+            _todoRepository.Commit();
+            return true;
         }
     }
 }

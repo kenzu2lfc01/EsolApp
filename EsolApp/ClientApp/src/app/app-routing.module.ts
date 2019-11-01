@@ -4,6 +4,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RegisterComponent } from './auth/register/register.component';
 import { AfterRegisterComponent } from './auth/register/after-register/after-register.component';
+import { DialogComponent } from './todo/image/dialog/dialog.component';
+import { SharedTodoComponent } from './todo/shared-todo/shared-todo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -11,8 +13,10 @@ const routes: Routes = [
   { path: 'todo', loadChildren: './todo/todo.module#TodoPageModule', canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'afterregister', component: AfterRegisterComponent },
-  { path: 'english-book', loadChildren: './english-book/english-book.module#EnglishBookPageModule', canActivate: [AuthGuard] },
+  { path: 'sharedtodo', component: SharedTodoComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'tododetail/:id', component: DialogComponent },
+
 ];
 
 @NgModule({

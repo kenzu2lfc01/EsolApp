@@ -8,6 +8,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ImageService } from '../service/images/image.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from './image/dialog/dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router, NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.page.html',
@@ -20,14 +22,15 @@ export class TodoPage implements OnInit {
     private http: HttpClient,
     private routerNameService: RouterNamesService,
     private imageService: ImageService,
-    private sanitizer: DomSanitizer,
-    private dialog: MatDialog) {
+    private router: Router,
+    private sinper: NgxSpinnerService) {
   }
 
   // tslint:disable-next-line: member-ordering
   public todoList: Array<TodoModel> = [];
   private checker = false;
   ionViewWillEnter() {
+    this.sinper.show();
     this.checker = false;
     this.routerNameService.name.next('Todo');
     this.loadDataOfPage();
@@ -104,9 +107,9 @@ export class TodoPage implements OnInit {
     });
   }
   loadDataOfPage() {
-    setTimeout(() => this.service.getTodoList().then((res) => {
+    this.service.getTodoList().then((res) => {
       this.todoList = res.filter(x => x.status === this.checker);
-    }), 5000);
+    });
   }
   public CheckTodo() {
     if (this.service.todos.length === 0) { return true; }
@@ -114,27 +117,7 @@ export class TodoPage implements OnInit {
   }
   ngOnInit() {
   }
-  async deleteImage(id) {
-    const alert = await this.alertController.create({
-      header: 'Do you want delete image?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => { }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            this.imageService.deleteImage(id).subscribe(() => {
-              this.loadDataOfPage();
-            });
-          }
-        }]
-    });
-    await alert.present();
-  }
   openMenuUpload(id) {
-    this.dialog.open(DialogComponent, { data: { todoId: id, checker: this.checker } });
+    this.router.navigate(['/tododetail', id]);
   }
 }

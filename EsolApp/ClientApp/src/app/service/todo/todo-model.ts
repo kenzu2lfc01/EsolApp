@@ -13,3 +13,9 @@ export class TodoViewModel {
     TodoName: string;
     Description: string;
 }
+
+export class TodoPatchViewModel {
+    id: number;
+    TodoName: string;
+    Description: string;
+}

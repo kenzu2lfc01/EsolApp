@@ -10,7 +10,9 @@ namespace EsolApp.ViewModel
         public int Id { get; set; }
         public string TodoName { get; set; }
         public string Description { get; set; }
+        public DateTime? ModifyDate { get; set; }
         public bool Status { get; set; }
+        public Guid UserId { get; set; }
         public List<ImageViewModel> ImageViewModels { get; set; }
     }
 }

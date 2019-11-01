@@ -32,6 +32,7 @@ namespace IdSrv4.Controllers
         private readonly IViewRenderService _viewRender;
         private readonly AppSettings _appSettings;
         private readonly IHashByMD5 _hashByMD5;
+        private readonly IJwtService _jwtService;
 
         public AccountController(
             AppDbContext appContext,
@@ -39,16 +40,37 @@ namespace IdSrv4.Controllers
             IOptions<AppSettings> appSettings,
             IViewRenderService viewRender,
             IHashByMD5 hashByMD5,
+            IJwtService jwtService,
             ILogger<AccountController> logger)
         {
             _appContext = appContext;
             _emailSender = emailSender;
             _hashByMD5 = hashByMD5;
+            _jwtService = jwtService;
             _logger = logger;
             _viewRender = viewRender;
             _appSettings = appSettings.Value;
         }
-        
+        [HttpGet]
+        [Route("GetUsers/{token}")]
+        public List<UsersViewModel> GetAllUser(string token)
+        {
+            IEnumerable<Claim> claims = _jwtService.GetClaim(token);
+            Guid UserID = Guid.Parse(claims.FirstOrDefault().Value);
+            var temp = _appContext.Users.Where(x => x.Id != UserID).ToList();
+            List<UsersViewModel> users = new List<UsersViewModel>();
+            foreach(var item in temp)
+            {
+                UsersViewModel usersViewModel = new UsersViewModel()
+                {
+                    Id = item.Id,
+                    UserName = item.UserName,
+                    Name = item.Name
+                };
+                users.Add(usersViewModel);
+            }
+            return users;
+        }
         [HttpPost]
         [Route("Login")]
         //POST : /api/Account/Login

@@ -9,6 +9,9 @@ using EsolApp.Data;
 using EsolApp.Data.Model;
 using EsolApp.Services;
 using EsolApp.ViewModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EsolApp.Controllers
 {
@@ -18,18 +21,24 @@ namespace EsolApp.Controllers
     {
         private readonly ITodoService _todoService;
         private readonly IImageService _imageService;
-        public TodoController(ITodoService todoService, IImageService imageService)
+        private readonly IJwtService _jwtService;
+
+        public TodoController(ITodoService todoService, IImageService imageService, IJwtService jwtService)
         {
             _todoService = todoService;
             _imageService = imageService;
-        }
+            _jwtService = jwtService;
 
-        // GET: api/Todo
+        }
         [HttpGet]
+        [Route("get")]
         public ActionResult<IEnumerable<TodoViewModel>> GetTodos()
         {
-            List<TodoViewModel> lstTodoOutput = new List<TodoViewModel>();
-            var todos = _todoService.GetAllTodos();
+            string token = this.HttpContext.Request.Headers["Authorization"];
+            IEnumerable<Claim> claims = _jwtService.GetClaim(token);
+            Guid UserID = Guid.Parse(claims.FirstOrDefault().Value);
+           List<TodoViewModel> lstTodoOutput = new List<TodoViewModel>();
+            var todos = _todoService.GetAllTodos().Where(x=> x.UserId == UserID).ToList();
             foreach (var item in todos)
             {
                 TodoViewModel todoOutput = new TodoViewModel()
@@ -37,6 +46,7 @@ namespace EsolApp.Controllers
                     Id = item.Id,
                     TodoName = item.TodoName,
                     Description = item.Description,
+                    ModifyDate = item.ModifyDate,
                     Status = item.Status,
                     ImageViewModels = _imageService.GetImageByTodoId(item.Id)
                 };
@@ -56,11 +66,15 @@ namespace EsolApp.Controllers
         [Route("create")]
         public ActionResult<Todos> PostTodos([FromBody]TodoViewModel todo)
         {
+            string token = this.HttpContext.Request.Headers["Authorization"];
+            IEnumerable<Claim> claims = _jwtService.GetClaim(token);
+            Guid UserID = Guid.Parse(claims.FirstOrDefault().Value);
             Todos todos = new Todos()
             {
                 TodoName = todo.TodoName,
                 Description = todo.Description,
                 Status = false,
+                UserId = UserID,
                 CreateDate = DateTime.Now,
                 ModifyDate = DateTime.Now
             };
@@ -68,7 +82,16 @@ namespace EsolApp.Controllers
             //return HttpResponse();
             return CreatedAtAction("GetTodos", new { id = todos.Id }, todo);
         }
-
+        [HttpPut]
+        public ActionResult PatchTodo([FromBody]TodoPatchViewModel todoPatchViewModel)
+        {
+            bool check = _todoService.UpdateTodo(todoPatchViewModel);
+            if (!check)
+            {
+                return BadRequest("Update fail");
+            }
+            return Ok("Update success");
+        }
         // DELETE: api/Todo/5
         [HttpDelete]
         [Route("delete/{id}")]

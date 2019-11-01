@@ -4262,9 +4262,6 @@
       },
       "Microsoft.DiaSymReader.Native/1.7.0": {
         "type": "package",
-        "native": {
-          "runtimes/win-x86/native/Microsoft.DiaSymReader.Native.x86.dll": {}
-        },
         "build": {
           "build/_._": {}
         }
@@ -5038,7 +5035,7 @@
           "ref/net461/Microsoft.Win32.Registry.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll": {}
+          "lib/net461/Microsoft.Win32.Registry.dll": {}
         }
       },
       "MimeKit/2.3.2": {
@@ -5272,7 +5269,7 @@
           "ref/net461/System.Data.SqlClient.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Data.SqlClient.dll": {}
+          "lib/net461/System.Data.SqlClient.dll": {}
         }
       },
       "System.Diagnostics.Debug/4.3.0": {
@@ -5310,7 +5307,7 @@
           "ref/net46/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/net46/System.Diagnostics.FileVersionInfo.dll": {}
+          "lib/net46/System.Diagnostics.FileVersionInfo.dll": {}
         }
       },
       "System.Diagnostics.StackTrace/4.3.0": {
@@ -5395,7 +5392,7 @@
           "ref/net46/System.IO.Compression.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net46/System.IO.Compression.dll": {}
+          "lib/net46/System.IO.Compression.dll": {}
         }
       },
       "System.IO.FileSystem/4.3.0": {
@@ -5491,7 +5488,7 @@
           "ref/net46/System.Net.Http.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net46/System.Net.Http.dll": {}
+          "lib/net46/System.Net.Http.dll": {}
         }
       },
       "System.Numerics.Vectors/4.5.0": {
@@ -5591,7 +5588,7 @@
           "ref/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net45/System.Runtime.InteropServices.RuntimeInformation.dll": {}
+          "lib/net45/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
       "System.Runtime.Numerics/4.3.0": {
@@ -5618,7 +5615,7 @@
           "ref/net461/System.Security.AccessControl.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.AccessControl.dll": {}
+          "lib/net461/System.Security.AccessControl.dll": {}
         }
       },
       "System.Security.Cryptography.Algorithms/4.3.0": {
@@ -5634,7 +5631,7 @@
           "ref/net461/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.Cryptography.Algorithms.dll": {}
+          "lib/net461/System.Security.Cryptography.Algorithms.dll": {}
         }
       },
       "System.Security.Cryptography.Cng/4.5.0": {
@@ -5647,7 +5644,7 @@
           "ref/net461/System.Security.Cryptography.Cng.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.Cryptography.Cng.dll": {}
+          "lib/net461/System.Security.Cryptography.Cng.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.3.0": {
@@ -5660,7 +5657,7 @@
           "ref/net46/System.Security.Cryptography.Encoding.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net46/System.Security.Cryptography.Encoding.dll": {}
+          "lib/net46/System.Security.Cryptography.Encoding.dll": {}
         }
       },
       "System.Security.Cryptography.Primitives/4.3.0": {
@@ -5690,7 +5687,7 @@
           "ref/net461/System.Security.Cryptography.X509Certificates.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.Cryptography.X509Certificates.dll": {}
+          "lib/net461/System.Security.Cryptography.X509Certificates.dll": {}
         }
       },
       "System.Security.Cryptography.Xml/4.5.0": {
@@ -5743,7 +5740,7 @@
           "ref/net461/System.Security.Principal.Windows.dll": {}
         },
         "runtime": {
-          "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {}
+          "lib/net461/System.Security.Principal.Windows.dll": {}
         }
       },
       "System.Text.Encoding/4.3.0": {
@@ -5761,7 +5758,7 @@
           "ref/netstandard1.3/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netstandard1.3/System.Text.Encoding.CodePages.dll": {}
+          "lib/net46/System.Text.Encoding.CodePages.dll": {}
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -10752,12 +10749,11 @@
       ]
     },
     "System.Text.Encoding.CodePages/4.3.0": {
-      "sha512": "IRiEFUa5b/Gs5Egg8oqBVoywhtOeaO2KOx3j0RfcYY/raxqBuEK7NXRDgOwtYM8qbi+7S4RPXUbNt+ZxyY0/NQ==",
+      "sha512": "6ENnyNU7cdmUVYblQ9GzLuJlLs9HWyoSInm+JZyCBHFUTaSQZolLIdGSZWGw5VOhjbFop+u/pU0AbKiHQKheqw==",
       "type": "package",
       "path": "system.text.encoding.codepages/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -11445,31 +11441,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\C&C LAPTOP\\.nuget\\packages\\": {},
+    "C:\\Users\\thang.nguyen\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Homework\\LT-ASP\\Ionic_ASPNet\\EsolApp\\IdSrv4\\IdSrv4.csproj",
+      "projectUniqueName": "C:\\Users\\thang.nguyen\\Desktop\\IonicStudy\\EsolApp\\IdSrv4\\IdSrv4.csproj",
       "projectName": "IdSrv4",
-      "projectPath": "D:\\Homework\\LT-ASP\\Ionic_ASPNet\\EsolApp\\IdSrv4\\IdSrv4.csproj",
-      "packagesPath": "C:\\Users\\C&C LAPTOP\\.nuget\\packages\\",
-      "outputPath": "D:\\Homework\\LT-ASP\\Ionic_ASPNet\\EsolApp\\IdSrv4\\obj\\",
+      "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\IonicStudy\\EsolApp\\IdSrv4\\IdSrv4.csproj",
+      "packagesPath": "C:\\Users\\thang.nguyen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\thang.nguyen\\Desktop\\IonicStudy\\EsolApp\\IdSrv4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\C&C LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\thang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "net461"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://vsonline.orientsoftware.net/tfs/DefaultCollection/_packaging/Common/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net461": {
@@ -11559,8 +11559,7 @@
             "target": "Package",
             "version": "[9.12.0, )"
           }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
       }
     },
     "runtimes": {

@@ -5,8 +5,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div style="margin-top: 10px; margin-left: 10px;">
-    <ion-label *ngIf="loginService.isCurrentUser()">Welcome</ion-label>
+  <div style="margin-left: 10px;">
+    <ion-label *ngIf="loginService.isCurrentUser()"></ion-label>
     <ion-label *ngIf="!loginService.isCurrentUser()">If you want use us service, please <a href="/login">Login</a>
     </ion-label>
   </div>

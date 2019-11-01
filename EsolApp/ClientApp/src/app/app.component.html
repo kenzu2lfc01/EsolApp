@@ -8,12 +8,16 @@
         </ion-title>
         <button class="custom-style-button" ion-button *ngIf="!service.isCurrentUser()"
                 routerLink="/login">Login</button>
-        <button class="custom-style-button" ion-button *ngIf="service.isCurrentUser()"
-                (click)="logout()">Logout</button>
+        <ion-row *ngIf="service.isCurrentUser()">
+          <button class="custom-style-button" ion-button
+                  (click)="logout()">Logout</button>
+        </ion-row>
       </ion-row>
     </ion-toolbar>
     <div></div>
   </ion-header>
+  <ion-content>
+  </ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="home">
@@ -26,9 +30,9 @@
         <ion-label>Todo</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="english-book">
-        <ion-icon name="book"></ion-icon>
-        <ion-label>English Book</ion-label>
+      <ion-tab-button tab="sharedtodo">
+        <ion-icon name="share"></ion-icon>
+        <ion-label>Shared Todo</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
 

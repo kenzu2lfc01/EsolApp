@@ -1,8 +1,50 @@
-<form style="text-align: center;">
-  <h2>Upload Image</h2>
-  <ion-col>
-    <ion-label id="profile_image" color="primary" stacked></ion-label>
-    <ion-input #file (change)="loadFile($event)" (change)="upload($event)" type="file" accept="image/*" id="upload">
-    </ion-input>
-  </ion-col>
-</form>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button class="custom-button-share" color="success" (click)="showFindDialog()"> Share
+    <ion-icon class="custom-search-logo" name="share-alt"></ion-icon>
+  </ion-button>
+  <ion-item>
+    <ion-label color="success">Todo Name: </ion-label>
+    <ion-input (change)="onChangeInputName(todoname.value)" (ionBlur)="onFocusOutTodoName()" #todoname
+               [readonly]="isEditName" [ngModel]="todoItem.todoName"
+               style="color: black;"></ion-input>
+    <ion-icon (click)="onClickEditName(todoname)" name="construct"></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-label color="success">Created:
+      <h4 style="display: inline; color: black;">
+        {{todoItem.modifyDate | date: 'dd/MM/yyyy hh:mm a'}}</h4>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label color="success">Status:
+      <h2 style="display: inline;color: black;">{{getRealStatus(todoItem.realStatus)}}</h2>
+    </ion-label>
+  </ion-item>
+  <ion-item text-wrap>
+    <ion-label color="success">Description: </ion-label>
+    <ion-textarea (change)="onChangeInputDes(inputdescription.value)" #inputdescription (ionBlur)="onFocusOutDes()"
+                  [readonly]="isEditDes" [ngModel]="todoItem.description" style="color: black;">
+    </ion-textarea>
+    <ion-icon (click)="onClickEditDes(inputdescription)" name="construct"></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-label color="success" id="profile_image" stacked>Images:
+      <br>
+      <ion-row>
+        <img *ngFor="let image of todoItem.imageViewModels"
+             style="width: 50px; height: 50px;"
+             [src]="'data:image/jpg;base64,' + image.base64Image"
+             (click)="deleteImage(image.Id)">
+        <ion-label (click)="showAddImageDialog()" color="success">
+          <ion-icon style="width: 50px; height: 30px;margin-top: 14px" name="add" slot="icon-only"></ion-icon>
+        </ion-label>
+      </ion-row>
+    </ion-label>
+  </ion-item>
+</ion-content>

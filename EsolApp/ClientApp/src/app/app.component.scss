@@ -1,6 +1,17 @@
-.custom-style-button{
+.custom-style-button {
     margin-right: 10px;
     background-color: transparent;
     color: #296b92;
     font-size: 18px;
+}
+
+.custom-style-button-find {
+    background-color: transparent;
+    color: #296b92;
+    font-size: 18px;
+}
+
+.custom-dialog-container .mat-dialog-container {
+    display: contents;
+    height: 60%;
 }

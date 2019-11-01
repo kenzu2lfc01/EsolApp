@@ -11,6 +11,7 @@ using IdSrv4.Services.ViewRender;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,10 @@ namespace IdSrv4
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IViewRenderService, ViewRenderService>();
+            services.AddScoped<IJwtService, JwtService>();
+
             var key = Encoding.UTF8.GetBytes(Configuration["AppSettings:JWT_Secret"].ToString());
 
             services.AddIdentity<AppUser, AppRole>()

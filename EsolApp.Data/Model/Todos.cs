@@ -13,6 +13,8 @@ namespace EsolApp.Data.Model
         public string TodoName { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
+        public Guid UserId { get; set; }
+        public virtual IEnumerable<TodoShare> TodoShares { get; set; }
         public virtual IEnumerable<Images> Images { get; set; } 
     }
 }

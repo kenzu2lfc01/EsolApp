@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginViewModel } from './login-model.model';
+import { LoginViewModel, UsersViewModel } from './login-model.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   public username: string;
+  public users: Array<UsersViewModel> = [];
   constructor(private http: HttpClient, private router: Router) { }
   rootUrl = 'https://localhost:44398/api/Account';
   login(dataLogin) {
@@ -21,5 +22,11 @@ export class LoginService {
   isCurrentUser() {
     if (localStorage.getItem('token') == null) { return false; }
     return true;
+  }
+  getUsers() {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(this.rootUrl + '/GetUsers/' + localStorage.getItem('token')).subscribe((res) => {
+      this.users = res as Array<UsersViewModel>;
+    });
   }
 }
