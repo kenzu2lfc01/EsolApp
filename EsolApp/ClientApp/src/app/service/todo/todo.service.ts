@@ -12,8 +12,15 @@ export class TodoService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: localStorage.getItem('token') }), responseType: 'text' as 'json' };
   rootUrl = 'https://localhost:44346/api/Todo';
   todoViewModel: TodoPatchViewModel;
+   getAllTodo() {
+    return this.http.get(this.rootUrl);
+  }
   async getTodoList() {
     await this.http.get(this.rootUrl + '/get', this.httpOptions).toPromise().then((res: string) => this.todos = JSON.parse(res));
+    return await this.todos;
+  }
+  async getTodoShareList() {
+    await this.http.get(this.rootUrl + '/getshare', this.httpOptions).toPromise().then((res: string) => this.todos = JSON.parse(res));
     return await this.todos;
   }
   postTodoList(todo) {
@@ -25,6 +32,9 @@ export class TodoService {
   updateStatusTodo(data) {
     const httpRequest = new HttpRequest('POST', this.rootUrl + `/update`, data);
     return httpRequest;
+  }
+  onShare(shareTodo) {
+    return this.http.post(this.rootUrl + '/share', shareTodo);
   }
   updateTodo(todo: TodoModel) {
     this.todoViewModel = {

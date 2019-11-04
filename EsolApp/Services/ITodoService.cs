@@ -14,5 +14,8 @@ namespace EsolApp.Services
         void DeleteTodo(int Id);
         void UpdateStatus(int Id);
         bool UpdateTodo(TodoPatchViewModel todoPatchViewModel);
+        void ShareTodo(ShareTodoViewModel shareTodo);
+        List<TodoViewModel> GetTodoShare(Guid UserId);
+
     }
 }

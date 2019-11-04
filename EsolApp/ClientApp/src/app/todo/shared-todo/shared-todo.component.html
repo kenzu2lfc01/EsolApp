@@ -5,7 +5,35 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div>
-    show something
-  </div>
+  <ion-list>
+    <ion-item-sliding *ngFor="let todo of todoList">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="content-of-col">
+              <h3>
+                <ion-icon *ngIf="!todo.status" color="warning" name="radio-button-on"></ion-icon>
+                <ion-icon *ngIf="todo.status" color="success" name="radio-button-on"></ion-icon>
+              </h3>
+            </ion-col>
+            <ion-col class="custom-width-content">
+              <ion-label (click)="openMenuUpload(todo.id)">
+                <div class="ion-text-start white-space">
+                  <h2 style="font-weight: bold;">{{todo.todoName}}</h2>
+                  <h3>{{todo.description}}</h3>
+                </div>
+              </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>
+                <div class="ion-text-end">
+                  <h3>{{todo.modifyDate | date: 'dd/MM/yyyy hh:mm a'}}</h3>
+                </div>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

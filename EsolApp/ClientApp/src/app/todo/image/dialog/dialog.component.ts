@@ -35,6 +35,7 @@ export class DialogComponent implements OnInit {
     imageViewModels: [],
     status: true,
   };
+  public isHiddenItem = true;
   currentFile: any;
   message = 'Upload successs';
   isEditName = true;
@@ -48,10 +49,11 @@ export class DialogComponent implements OnInit {
     return 'Doing';
   }
   ionViewWillEnter() {
+    this.isHiddenItem = JSON.parse((this.route.snapshot.paramMap.get('checker')));
     this.routerNameService.name.next('Todo Detail');
     // tslint:disable-next-line: radix
     const id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-    this.todoService.getTodoList().then((res) => {
+    this.todoService.getAllTodo().subscribe((res: Array<TodoModel>) => {
       this.todoItem = res.filter(x => x.id === id)[0];
     });
   }
@@ -59,7 +61,7 @@ export class DialogComponent implements OnInit {
     this.dialog.open(ShowAddImageComponent, { data: this.todoItem.id });
   }
   showFindDialog() {
-    this.dialog.open(FindComponent, { panelClass: 'custom-dialog-container' });
+    this.dialog.open(FindComponent, { panelClass: 'custom-dialog-container', data: this.todoItem.id });
   }
   async deleteImage(id) {
     const alert = await this.alertController.create({

@@ -1,12 +1,12 @@
 <mat-toolbar style="width: 110%;background-color:transparent ;">
   <ion-searchbar style="margin-left: -35px;"></ion-searchbar>
-  <ion-label color="primary">
+  <ion-label (click)="onShare()" color="primary">
     <ion-icon style="width: 30px;height: 35px;" name="share-alt"></ion-icon>
   </ion-label>
 </mat-toolbar>
 <mat-dialog-content>
   <ion-list>
-    <ion-item (click)="onChoose()" *ngFor="let item of accountService.users">{{item.name}}
+    <ion-item *ngFor="let item of accountService.users" (click)="onChoose(item.id)">{{item.name}}
       <ion-label color="primary" class="custom-checker" [hidden]="isHidden" end>
         <ion-icon name="checkmark"></ion-icon>
       </ion-label>

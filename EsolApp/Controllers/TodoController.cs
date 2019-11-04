@@ -31,13 +31,19 @@ namespace EsolApp.Controllers
 
         }
         [HttpGet]
+        public ActionResult<IEnumerable<TodoViewModel>> GetAllTodos()
+        {
+           return Ok(_todoService.GetAllTodos().ToList());
+        }
+
+        [HttpGet]
         [Route("get")]
         public ActionResult<IEnumerable<TodoViewModel>> GetTodos()
         {
             string token = this.HttpContext.Request.Headers["Authorization"];
             IEnumerable<Claim> claims = _jwtService.GetClaim(token);
             Guid UserID = Guid.Parse(claims.FirstOrDefault().Value);
-           List<TodoViewModel> lstTodoOutput = new List<TodoViewModel>();
+            List<TodoViewModel> lstTodoOutput = new List<TodoViewModel>();
             var todos = _todoService.GetAllTodos().Where(x=> x.UserId == UserID).ToList();
             foreach (var item in todos)
             {
@@ -53,6 +59,15 @@ namespace EsolApp.Controllers
                 lstTodoOutput.Add(todoOutput);
             }
             return Ok(lstTodoOutput);
+        }
+        [HttpGet]
+        [Route("getshare")]
+        public ActionResult<IEnumerable<TodoViewModel>> GetTodoShares()
+        {
+            string token = this.HttpContext.Request.Headers["Authorization"];
+            IEnumerable<Claim> claims = _jwtService.GetClaim(token);
+            Guid UserID = Guid.Parse(claims.FirstOrDefault().Value);
+            return _todoService.GetTodoShare(UserID);
         }
         [HttpPost]
         [Route("update")]
@@ -91,6 +106,17 @@ namespace EsolApp.Controllers
                 return BadRequest("Update fail");
             }
             return Ok("Update success");
+        }
+        [HttpPost]
+        [Route("share")]
+        public ActionResult ShareTodo(ShareTodoViewModel shareTodo)
+        {
+            if(shareTodo == null)
+            {
+                return BadRequest();
+            }
+            _todoService.ShareTodo(shareTodo);
+            return Ok();
         }
         // DELETE: api/Todo/5
         [HttpDelete]

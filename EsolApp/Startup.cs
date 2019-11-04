@@ -4,6 +4,7 @@ using EsolApp.Data;
 using EsolApp.Data.Model;
 using EsolApp.Data.Repositories.Images;
 using EsolApp.Data.Repositories.Todo;
+using EsolApp.Data.Repositories.Todo.ShareTodo;
 using EsolApp.Data.Repository;
 using EsolApp.Services;
 using IdentityServer4;
@@ -48,6 +49,9 @@ namespace EsolApp
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IShareTodoRepository, ShareTodoRepository>();
+
+            
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());

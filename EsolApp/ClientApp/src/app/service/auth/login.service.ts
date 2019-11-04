@@ -23,6 +23,7 @@ export class LoginService {
     if (localStorage.getItem('token') == null) { return false; }
     return true;
   }
+
   getUsers() {
     // tslint:disable-next-line: max-line-length
     return this.http.get(this.rootUrl + '/GetUsers/' + localStorage.getItem('token')).subscribe((res) => {

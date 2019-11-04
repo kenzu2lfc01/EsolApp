@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { TodoService } from '../service/todo/todo.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { Router, NavigationExtras } from '@angular/router';
   selector: 'app-todo',
   templateUrl: './todo.page.html',
   styleUrls: ['./todo.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TodoPage implements OnInit {
   // tslint:disable-next-line: max-line-length
@@ -22,15 +23,13 @@ export class TodoPage implements OnInit {
     private http: HttpClient,
     private routerNameService: RouterNamesService,
     private imageService: ImageService,
-    private router: Router,
-    private sinper: NgxSpinnerService) {
+    private router: Router) {
   }
 
   // tslint:disable-next-line: member-ordering
   public todoList: Array<TodoModel> = [];
   private checker = false;
   ionViewWillEnter() {
-    this.sinper.show();
     this.checker = false;
     this.routerNameService.name.next('Todo');
     this.loadDataOfPage();
@@ -117,7 +116,7 @@ export class TodoPage implements OnInit {
   }
   ngOnInit() {
   }
-  openMenuUpload(id) {
-    this.router.navigate(['/tododetail', id]);
+  openMenuUpload(todoId) {
+    this.router.navigate(['/tododetail', { id: todoId, checker: false }]);
   }
 }

@@ -19,3 +19,7 @@ export class TodoPatchViewModel {
     TodoName: string;
     Description: string;
 }
+export class LoginShareViewModel {
+    UserId: Array<string>;
+    TodoId: number;
+}

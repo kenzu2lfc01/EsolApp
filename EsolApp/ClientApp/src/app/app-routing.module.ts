@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'afterregister', component: AfterRegisterComponent },
   { path: 'sharedtodo', component: SharedTodoComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'tododetail/:id', component: DialogComponent },
+  { path: 'tododetail', component: DialogComponent },
 
 ];
 
